@@ -3,7 +3,6 @@ from copy import copy
 
 def find_winning_region_reachability_game(vertices_graph, edges_graph, map_vertex_to_player, good_states):
 	attractor_i = copy(good_states)
-	# print("h")
 	updated_length = len(good_states)
 	prev_length = len(good_states)-1
 
@@ -67,26 +66,4 @@ def check_if_never_winning_stratergy( vertices_graph, edges_graph, vertex_to_pla
 	if initial_state not in winning_region: 
 		return False
 	return True
-
-# vertices_graph = {0 ,1,2,3,4,5,6,7,8}
-# edges_graph = { 0: [1,3] ,1 : [0,2] , 
-# 				2: [1,5] , 3: [4,6] , 4: [0,7,8] , 5:[1,7] , 
-# 				6:[7] , 7: [8,6] , 8:[5]  }
-# map_vertex_to_player = { 0: 1 ,1:0 , 2:1 , 3: 0 , 4: 1 , 5:0 , 6: 1 , 7:0 ,8:0 }
-
-# vertices_graph = {0,1,2,3,4}
-# edges_graph = {
-# 				0: [1,4],
-# 				1: [0,2],
-# 				2: [1,3],
-# 				3: [3],
-# 				4: [2]
-# }
-
-# map_vertex_to_player = { 0:0 , 1:1, 2:0 , 3:1 , 4: 0}
-
-# bad_states = {3}
-
-# for i in range(0,5):
-# 	initial_state = i
-# 	print(i, check_if_always_winning_stratergy( vertices_graph, edges_graph, map_vertex_to_player, bad_states , initial_state, 1))
+	
