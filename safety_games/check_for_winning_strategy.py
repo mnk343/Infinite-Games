@@ -70,19 +70,19 @@ def check_if_never_winning_stratergy( vertices_graph, edges_graph, map_vertex_to
 # 				6:[7] , 7: [8,6] , 8:[5]  }
 # map_vertex_to_player = { 0: 1 ,1:0 , 2:1 , 3: 0 , 4: 1 , 5:0 , 6: 1 , 7:0 ,8:0 }
 
-vertices_graph = {0,1,2,3,4}
-edges_graph = {
-				0: [1,4],
-				1: [0,2],
-				2: [1,3],
-				3: [3],
-				4: [2]
-}
+# vertices_graph = {0,1,2,3,4}
+# edges_graph = {
+# 				0: [1,4],
+# 				1: [0,2],
+# 				2: [1,3],
+# 				3: [3],
+# 				4: [2]
+# }
 
-map_vertex_to_player = { 0:0 , 1:1, 2:0 , 3:1 , 4: 0}
+# map_vertex_to_player = { 0:0 , 1:1, 2:0 , 3:1 , 4: 0}
 
-bad_states = {3}
+# bad_states = {3}
 
-for i in range(0,5):
-	initial_state = i
-	print(i, check_if_always_winning_stratergy( vertices_graph, edges_graph, map_vertex_to_player, bad_states , initial_state, 1))
+# for i in range(0,5):
+# 	initial_state = i
+# 	print(i, check_if_always_winning_stratergy( vertices_graph, edges_graph, map_vertex_to_player, bad_states , initial_state, 1))
