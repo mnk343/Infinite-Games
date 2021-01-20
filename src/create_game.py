@@ -1,3 +1,5 @@
+from check_for_winning_strategy import *
+
 if __name__ == "__main__":
     m, n = 3, 3
     area = [
@@ -89,24 +91,30 @@ if __name__ == "__main__":
             for Bx in range(m):
                 for By in range(n):
                     curr_state = state_pos_to_index[Ax, Ay, Bx, By]
-                    for d in len(next_x):
+                    for d in range(len(next_x)):
                         new_x = Ax + next_x[d]
                         new_y = Ay + next_y[d]
-                        if [new_x, new_y, Bx, By] in state_pos_to_index:
+                        if (new_x, new_y, Bx, By) in state_pos_to_index:
                             next_state = state_pos_to_index[new_x, new_y, Bx, By]
-                            if next_state not in edges_graph:
+                            if curr_state not in edges_graph:
                                 edges_graph[curr_state] = [next_state]
                             else:
                                 edges_graph[curr_state].append(next_state)
                     
-                    for d in len(next_x):
+                    for d in range(len(next_x)):
                         new_x = Bx + next_x[d]
                         new_y = By + next_y[d]
-                        if [Ax, Ay, new_x, new_y] in state_pos_to_index:
+                        if (Ax, Ay, new_x, new_y) in state_pos_to_index:
                             next_state = state_pos_to_index[Ax, Ay, new_x, new_y]
-                            if next_state not in edges_graph:
+                            if curr_state not in edges_graph:
                                 edges_graph[curr_state] = [next_state]
                             else:
                                 edges_graph[curr_state].append(next_state)
 
-    
+    c = 0
+    for initial_state in range(total_states):
+        print( "For state v" + str(initial_state) + ": " + str(check_if_always_winning_stratergy( vertices_graph, edges_graph, map_vertex_to_player, bad_states , initial_state, 0)))
+        if check_if_always_winning_stratergy( vertices_graph, edges_graph, map_vertex_to_player, bad_states , initial_state, 0) == False:
+            c += 1
+
+    print(c)
