@@ -121,7 +121,7 @@ if __name__ == "__main__":
                                 else:
                                     edges_graph[curr_state].append(curr_state)
                                 if player == 0:
-                                   if curr_state not in edges_graph:
+                                    if curr_state not in edges_graph:
                                         edges_graph[curr_state] = [state_pos_to_index[Ax, Ay, Bx, By, time, (player+1)%2]]
                                     else:
                                         edges_graph[curr_state].append(state_pos_to_index[Ax, Ay, Bx, By, time, (player+1)%2])

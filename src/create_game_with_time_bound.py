@@ -1,3 +1,5 @@
+from check_for_winning_strategy import *
+
 if __name__ == "__main__":
     area = [
         [1, 2, 1, 0, 0, 2],
@@ -168,4 +170,5 @@ if __name__ == "__main__":
         # for initial_state in range(total_states):
         initial_state = state_pos_to_index[ posA[0], posA[1], posB[0], posB[1], 0, 0]
         bad_states.append(state_pos_to_index[auxiliary_bad_state])
-        print( "For given state v: " + str(check_if_always_winning_stratergy( vertices_graph, edges_graph, map_vertex_to_player, bad_states , initial_state, 0)))
+        print( "For given state v: " + str(check_if_always_winning_stratergy( vertices_graph, edges_graph, map_vertex_to_player, set(bad_states) , initial_state, 0)))
+        
