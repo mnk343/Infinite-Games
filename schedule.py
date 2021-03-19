@@ -38,7 +38,7 @@ current_states = [("idle", 4), ("idle", 4)]
 environment = "idle"
 output = ["idle", "idle"]
 
-writing_time = [4, 4]
+writing_time = [3, 3]
 time_so_far = 0
 running_systems = 2
 system_running = [0, 0]
@@ -54,18 +54,16 @@ def move(player):
 		current_states[player] = graph [ current_states[player] , ("wr" , environment) ]
 	else:
 		return "idle"
-		curr_time = current_states[player]
-		current_states[player] = graph [ current_states[player] , ("wait" , environment) ]
 
 	if current_states[player][1] == bad:
 		running_systems -= 1
+		print("Packet for player " + str(player) + " not sent!" )
 
 	if current_states[player][1] == good:
 		running_systems -= 1
 		print("Packet for player " + str(player) + " sent!" )
 
-
-	if current_states[player] == "writing":
+	if current_states[player][0] == "writing":
 		return "busy"
 
 	return "idle"
@@ -77,6 +75,7 @@ while not system_halt:
 
 	output[1] = move(1)
 	environment = output[1]
+	print(current_states)
 
 	time.sleep(1)
 	print("Time elapsed: " + str(time_so_far))
