@@ -1,8 +1,11 @@
 from copy import copy
+import pickle
 from check_for_winning_strategy import *
 
+
 if __name__ == "__main__":
-    time_bound = 2
+    time_bound = 4
+    print(time_bound)
     # vertices_graph = {1,2,3}
     # edges_graph = {
     #                 1: [2,3],
@@ -47,6 +50,8 @@ if __name__ == "__main__":
                                                 state_index += 1
 
     bad_state_index = state_index
+    map_index_to_state[state_index] = (-1)
+
     vertices_graph.add(bad_state_index)
     map_vertex_to_player[ state_index ] = 0
 
@@ -163,9 +168,15 @@ if __name__ == "__main__":
                                                     next_state_index = map_state_to_index[next_state]
                                                     edges_graph[curr_state_index].append(next_state_index)
                                                 
+    
+
+    # print(edges_graph[5534])
+    # print(bad_state_index)
+    # exit()
 
     n = 0
     all_transitions = {}
+    good_transitions = {}
     players = [0, 1, 2]
     edges_graph_with_removed_transitions = copy(edges_graph)
 
@@ -203,6 +214,9 @@ if __name__ == "__main__":
                                 all_transitions[(player_index, vertex, adj_vertex)] = 1
                                 if adj_vertex in edges_graph_with_removed_transitions[vertex]:
                                     edges_graph_with_removed_transitions[vertex].remove(adj_vertex)
+                            else:
+                                good_transitions[(player_index, vertex, adj_vertex)] = 1
+
 
         transitions_new_count = len(all_transitions)
         if transitions_new_count == transitions_old_count:
@@ -213,3 +227,18 @@ if __name__ == "__main__":
         print(t[1], "->", t[2])
         print(map_index_to_state[t[1]])
         print(map_index_to_state[t[2]])
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    for t in good_transitions:
+        print(t[1], "->", t[2])
+        print(map_index_to_state[t[1]])
+        print(map_index_to_state[t[2]])
+
+
+    pickle.dump(good_transitions , open( "good_transitions" + str(time_bound), "wb" ) )
+    pickle.dump(all_transitions , open( "all_transitions" + str(time_bound), "wb" ) )
+
+
+
