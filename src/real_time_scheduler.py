@@ -2,51 +2,53 @@ from copy import copy
 from check_for_winning_strategy import *
 
 if __name__ == "__main__":
+    time_bound = 2
+    # vertices_graph = {1,2,3}
+    # edges_graph = {
+    #                 1: [2,3],
+    #                 2: [1,3],
+    #                 3: [3],
+    # }
 
-    vertices_graph = {1,2,3}
-    edges_graph = {
-                    1: [2,3],
-                    2: [1,3],
-                    3: [3],
-    }
+    # map_vertex_to_player = { 1:0, 2:1 , 3:0}
 
-    map_vertex_to_player = { 1:0, 2:1 , 3:0}
-
-    bad_states = [
-        {3},
-        {3}
-    ]
+    # bad_states = [
+    #     {3},
+    #     {3}
+    # ]
 
 
     # state = (a1, a2, r1, r2, k1, k2, q1, q2, t1, t2, p)
 
-    vertices_graph = {}
+    vertices_graph = set()
     state_index = 1
     map_index_to_state = {}
+    map_vertex_to_player = {}
     map_state_to_index = {}
     edges_graph = {}
 
-    for a1 in range(1):
-        for a2 in range(1):
-            for r1 in range(1):
-                for r2 in range(1):
+    for a1 in range(2):
+        for a2 in range(2):
+            for r1 in range(2):
+                for r2 in range(2):
                     for k1 in range(time_bound):
                         for k2 in range(time_bound):
-                            for q1 in range(1):
-                                for q2 in range(1):
-                                    for t1 in range(1):
-                                        for t2 in range(1):
+                            for q1 in range(2):
+                                for q2 in range(2):
+                                    for t1 in range(3):
+                                        for t2 in range(3):
                                             for p in range(3):
                                                 temp_state = (a1, a2, r1, r2, k1, k2, q1, q2, t1, t2, p)
                                                 vertices_graph.add(state_index)
                                                 map_state_to_index[temp_state] = state_index
-                                                map_index_to_state[state_index] = temp_index
-                                                state_index += 1
-                                                map_vertex_to_player[ temp_state ] = p 
+                                                map_index_to_state[state_index] = temp_state
+                                                map_vertex_to_player[ state_index ] = p 
                                                 edges_graph[state_index] = []
+                                                state_index += 1
 
     bad_state_index = state_index
     vertices_graph.add(bad_state_index)
+    map_vertex_to_player[ state_index ] = 0
 
     bad_states = [
         {bad_state_index}, 
@@ -60,12 +62,12 @@ if __name__ == "__main__":
         for a2 in range(2):
             for r1 in range(2):
                 for r2 in range(2):
-                    for k1 in range(time_bound):
-                        for k2 in range(time_bound):
+                    for k1 in range(1,time_bound):
+                        for k2 in range(1,time_bound):
                             for q1 in range(2):
                                 for q2 in range(2):
-                                    for t1 in range(3):
-                                        for t2 in range(3):
+                                    for t1 in range(1,3):
+                                        for t2 in range(1,3):
                                             for p in range(3):
                                                 # if r1 == 0 and t1 != 2:
                                                 curr_state = (a1, a2, r1, r2, k1, k2, q1, q2, t1, t2, p)
@@ -97,7 +99,7 @@ if __name__ == "__main__":
                                                             edges_graph[curr_state_index].append(next_state_index)
 
                                                     if a1 == 1 and r1 is 1:
-                                                        if k1 is 1:
+                                                        if k1 is 1 or k1 is 0:
                                                             next_state = bad_state_index
                                                             edges_graph[curr_state_index].append(next_state_index)
 
@@ -113,7 +115,7 @@ if __name__ == "__main__":
                                                         edges_graph[curr_state_index].append(next_state_index)
     
                                                     if a2 == 1 and r2 is 0:
-                                                        if k2 is 1:
+                                                        if k2 is 1 or k2 is 0:
                                                             next_state_index = bad_state_index
                                                             edges_graph[curr_state_index].append(next_state_index)
 
@@ -164,19 +166,30 @@ if __name__ == "__main__":
 
     n = 0
     all_transitions = {}
-    players = [0, 1]
+    players = [0, 1, 2]
     edges_graph_with_removed_transitions = copy(edges_graph)
 
     player_index = 0
     vertex = 0
     value = {}
+
     while True:
         value = {}
+
+        # edges_graph_with_removed_transitions, map_vertex_to_player, bad_states[player_index], vertex, player_index) == True:
         for vertex in vertices_graph:
             for player_index in players:
-                if check_if_always_winning_stratergy(vertices_graph, edges_graph_with_removed_transitions, map_vertex_to_player, bad_states[player_index], vertex, player_index) == True:
+
+                temp_map_vertex_to_player = copy ( map_vertex_to_player )
+                for key in temp_map_vertex_to_player:
+                    if ( temp_map_vertex_to_player[key] != player_index ):
+                        temp_map_vertex_to_player[key] = 1
+                    else: 
+                        temp_map_vertex_to_player[key] = 0
+
+                if check_if_always_winning_stratergy(vertices_graph, edges_graph_with_removed_transitions, temp_map_vertex_to_player, bad_states[0], vertex, 0) == True:
                     value[player_index, vertex] = 1
-                elif check_if_never_winning_stratergy(vertices_graph, edges_graph_with_removed_transitions, map_vertex_to_player, bad_states[player_index], vertex, player_index) == True:
+                elif check_if_never_winning_stratergy(vertices_graph, edges_graph_with_removed_transitions, temp_map_vertex_to_player, bad_states[0], vertex, 0) == True:
                     value[player_index, vertex] = -1
                 else:
                     value[player_index, vertex] = 0
@@ -198,3 +211,5 @@ if __name__ == "__main__":
     print("The set of dominated strategies: ")
     for t in all_transitions:
         print(t[1], "->", t[2])
+        print(map_index_to_state[t[1]])
+        print(map_index_to_state[t[2]])

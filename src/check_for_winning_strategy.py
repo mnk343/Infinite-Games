@@ -44,7 +44,7 @@ def check_if_always_winning_stratergy( vertices_graph, edges_graph, vertex_to_pl
 	dual_map_vertex_to_player = {}
 	good_states = bad_states
 	for vertex in vertices_graph:
-		dual_map_vertex_to_player[vertex] = (map_vertex_to_player[vertex] + 1 ) % 2
+		dual_map_vertex_to_player[vertex] = ( map_vertex_to_player[vertex] + 1 ) % 2
 
 	winning_region = find_winning_region_reachability_game(vertices_graph, edges_graph, dual_map_vertex_to_player, good_states)
 	if initial_state not in winning_region: 
