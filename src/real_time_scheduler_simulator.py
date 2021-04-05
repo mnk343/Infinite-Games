@@ -1,9 +1,9 @@
 import pickle
 
-good_transitions = pickle.load( open ( "good_transitions2" , "rb"))
-all_transitions = pickle.load( open ( "all_transitions2" , "rb"))
+good_transitions = pickle.load( open ( "good_transitions4" , "rb"))
+all_transitions = pickle.load( open ( "all_transitions4" , "rb"))
 
-time_bound = 2
+time_bound = 4
 vertices_graph = set()
 state_index = 1
 map_index_to_state = {}
