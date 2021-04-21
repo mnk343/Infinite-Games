@@ -84,13 +84,13 @@ if __name__ == "__main__":
                                                     edges_graph[curr_state_index].append(next_state_index)
 
                                                 elif p == 1:
-                                                    if a1 is 0:
+                                                    if a1 == 0:
                                                         next_state = (a1, a2, r1, r2, k1, k2, q1, q2, t1, t2, (p+1)%3 )
                                                         next_state_index = map_state_to_index[next_state]
                                                         edges_graph[curr_state_index].append(next_state_index)
     
-                                                    if a1 == 1 and r1 is 0:
-                                                        if k1 is 1:
+                                                    if a1 == 1 and r1 == 0:
+                                                        if k1 == 1:
                                                             next_state_index = bad_state_index
                                                             edges_graph[curr_state_index].append(next_state_index)
 
@@ -103,8 +103,8 @@ if __name__ == "__main__":
                                                             next_state_index = map_state_to_index[next_state]
                                                             edges_graph[curr_state_index].append(next_state_index)
 
-                                                    if a1 == 1 and r1 is 1:
-                                                        if k1 is 1 or k1 is 0:
+                                                    if a1 == 1 and r1 == 1:
+                                                        if k1 == 1 or k1 == 0:
                                                             next_state = bad_state_index
                                                             edges_graph[curr_state_index].append(next_state_index)
 
@@ -114,13 +114,13 @@ if __name__ == "__main__":
                                                             edges_graph[curr_state_index].append(next_state_index)
 
 
-                                                    if a2 is 0:
+                                                    if a2 == 0:
                                                         next_state = (a1, a2, r1, r2, k1, k2, q1, q2, t1, t2, (p+1)%3 )
                                                         next_state_index = map_state_to_index[next_state]
                                                         edges_graph[curr_state_index].append(next_state_index)
     
-                                                    if a2 == 1 and r2 is 0:
-                                                        if k2 is 1 or k2 is 0:
+                                                    if a2 == 1 and r2 == 0:
+                                                        if k2 == 1 or k2 == 0:
                                                             next_state_index = bad_state_index
                                                             edges_graph[curr_state_index].append(next_state_index)
 
@@ -133,8 +133,8 @@ if __name__ == "__main__":
                                                             next_state_index = map_state_to_index[next_state]
                                                             edges_graph[curr_state_index].append(next_state_index)
 
-                                                    if a2 == 1 and r2 is 1:
-                                                        if k2 is 1:
+                                                    if a2 == 1 and r2 == 1:
+                                                        if k2 == 1:
                                                             next_state = bad_state_index
                                                             edges_graph[curr_state_index].append(next_state_index)
                                                             
