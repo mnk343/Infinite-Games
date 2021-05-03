@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
 
     num_of_vertices = int(input("Enter number of vertices: "))
-    for v in range(1, num_of_vertices+1):
+    for v in range(0, num_of_vertices):
     	vertices_graph.add(v)
 
     print("Now, we will construct the edges graph...")
@@ -63,7 +63,7 @@ if __name__ == "__main__":
     print("Now, enter all the vertices (space-separated) owned by each player:")
 
     for p in players:
-    	p_vertices = [int(x) for x in input("Player "+ str(p+1) + ": ").split()]
+    	p_vertices = [int(x) for x in input("Player "+ str(p) + ": ").split()]
     	for v in p_vertices:
     		map_vertex_to_player[v] = p
 
@@ -71,7 +71,7 @@ if __name__ == "__main__":
     print("Now, enter all the bad vertices (space-separated) for each player:")
 
     for p in players:
-    	p_vertices = set({int(x) for x in input("Player "+ str(p+1) + ": ").split()})
+    	p_vertices = set({int(x) for x in input("Player "+ str(p) + ": ").split()})
     	bad_states.append(p_vertices)
 
 
