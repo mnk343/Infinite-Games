@@ -34,25 +34,55 @@ if __name__ == "__main__":
     ]
 
 
-    # vertices_graph = {0,1,2,3,4}
-    # edges_graph = {
-    #                 0: [1,4],
-    #                 1: [0,2],
-    #                 2: [1,3],
-    #                 3: [3],
-    #                 4: [2,4]
-    # }
+    vertices_graph = set({})
+    edges_graph = {}
+    map_vertex_to_player = {}
+    bad_states = []
+    players = []
 
-    # map_vertex_to_player = { 0:0 , 1:1, 2:0 , 3:1, 4:1}
 
-    # bad_states = [
-    #     {2},
-    #     {3}
-    # ]
+    num_of_vertices = int(input("Enter number of vertices: "))
+    for v in range(1, num_of_vertices+1):
+    	vertices_graph.add(v)
 
-    n = 0
+    print("Now, we will construct the edges graph...")
+
+    num_of_edges = int(input("Enter number of egdes: "))
+    print("In next " + str(num_of_edges) + " lines, enter space separated vertices having edge between them:")
+    for edge in range(num_of_edges):
+    	a, b = [int(x) for x in input().split()]
+    	if a not in edges_graph: 
+    		edges_graph[a] = []
+    	edges_graph[a].append(b)
+
+    num_of_players = int(input("Enter number of players: "))
+    for p in range(num_of_players):
+    	players.append(p)
+
+
+    print("Now, enter all the vertices (space-separated) owned by each player:")
+
+    for p in players:
+    	p_vertices = [int(x) for x in input("Player "+ str(p+1) + ": ").split()]
+    	for v in p_vertices:
+    		map_vertex_to_player[v] = p
+
+
+    print("Now, enter all the bad vertices (space-separated) for each player:")
+
+    for p in players:
+    	p_vertices = set({int(x) for x in input("Player "+ str(p+1) + ": ").split()})
+    	bad_states.append(p_vertices)
+
+
+    # print(vertices_graph)
+    # print(edges_graph)
+    # print(players)
+    # print(map_vertex_to_player)
+    # print(bad_states)
+    print("Finding admissible strategies: ")
+
     all_transitions = {}
-    players = [0, 1]
     edges_graph_with_removed_transitions = copy(edges_graph)
 
     player_index = 0
